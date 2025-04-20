@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import axios from "axios";
 import * as XLSX from "xlsx";
+import { useNavigate } from "react-router-dom";
 
 const Table = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
       const token = localStorage.getItem("token"); 
@@ -103,11 +105,35 @@ const Table = () => {
           : "Aucune",
     },
     {
-      field: "actions",
-      headerName: "Actions",
+      field: 'actions',
+      headerName: 'Actions',
       width: 150,
-      renderCell: (params) => (
-        <button onClick={() => handleDelete(params.row.id)}>🗑️ Supprimer</button>
+      renderCell: (data) => (
+        <div>
+          <button onClick={() => handleDelete(data.id)}>Delete </button>
+        </div>
+
+      ),
+    },
+    {
+      field: 'ac',
+      headerName: 'Actions',
+      width: 150,
+      renderCell: (data) => (
+        <div>
+          <button  onClick={() => navigate(`/modifier/${data.row.id}`)}> Modifier</button>
+        </div>
+      ),
+    },
+    {
+      field: 'act',
+      headerName: 'Action',
+      width: 150,
+      renderCell: (data) => (
+        <div>
+          <button   onClick={() => navigate(`/detail/${data.row.id}`)}> detail </button>
+
+    </div>
       ),
     },
   ];
@@ -154,9 +180,7 @@ const Table = () => {
           pageSize={6}
           rowHeight={60}
           autoHeight
-          filterModel={{
-            items: [{ columnField: "titre", operatorValue: "contains", value: "" }],
-          }}
+         
           localeText={{
             toolbarColumns: "Les colonnes",
             toolbarFilters: "Filtrer",

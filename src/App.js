@@ -6,6 +6,10 @@ import Sidebar from './Sidebar';
 import Home from './Home';
 import InnovationForm from './ajout/InnovationForm';
 import Login from './Login/Login';
+import UpdateInnovation from './updateInnovation/UpdateInnovation';
+import DetailInnovation from './Details/DetailInnovation';
+import Stats from './Stats';
+import StatsChart from './Stat';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -50,10 +54,22 @@ function App() {
           <Route
             path="/table"
             element={isAuthenticated ? <Table /> : <Navigate to="/Login" />}
-          />
+          /> <Route
+          path="/modifier/:id"
+          element={isAuthenticated ?<UpdateInnovation/>: <Navigate to="/Login" />}
+        />
+
+<Route
+          path="/detail/:id"
+          element={isAuthenticated ?<DetailInnovation/>: <Navigate to="/Login" />}
+        />
           <Route
             path="/ajout"
             element={isAuthenticated ? <InnovationForm /> : <Navigate to="/Login" />}
+          />
+          <Route
+            path="/statt"
+            element={isAuthenticated ? <StatsChart/> : <Navigate to="/Login" />}
           />
         </Routes>
       </main>

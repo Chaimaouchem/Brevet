@@ -9,6 +9,7 @@ import { BsGenderMale } from "react-icons/bs";
 import SimpleForm from './SimpleForm';
 import StatUniversity from './StatUniversity';
 import StatUnivYears from './StatUnivYears';
+import StatsChart from './Stat';
 function Home() {
   const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(true);
@@ -71,6 +72,7 @@ function Home() {
 
         {/* Graphiques supplémentaires */}
          <StatUnivYears />
+         <StatsChart />
 
        
 
